@@ -1,0 +1,4 @@
+INDEX VERSION 1.132+C:\Users\Usuario\Documents\CIBERTEC - TRABAJO\JAVA TRUCOS\.metadata\.plugins\org.eclipse.jdt.core
+404154252.index
+1865797976.index
+3443461419.index

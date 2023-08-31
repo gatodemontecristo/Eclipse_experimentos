@@ -1,0 +1,233 @@
+package gui;
+
+import semana_02.Edificio;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class Problema_2_3 extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
+	
+	private JPanel contentPane;
+	private JLabel lblCodigo;
+	private JTextField txtCodigo;
+	private JLabel lblNumDptos;
+	private JTextField txtNumDptos;
+	private JLabel lblNumPisos;
+	private JTextField txtNumPisos;	
+	private JLabel lblPrecioDpto;
+	private JTextField txtPrecioDpto;	
+	private JButton btnProcesar;
+	private JButton btnBorrar;
+	private JScrollPane scrollPane;
+	private JTextArea txtS;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Problema_2_3 frame = new Problema_2_3();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Problema_2_3() {
+		setTitle("Problema_2_3");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblCodigo = new JLabel("c\u00F3digo");
+		lblCodigo.setBounds(10, 15, 50, 23);
+		contentPane.add(lblCodigo);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				Character c = arg0.getKeyChar();
+				if(Character.isLetter(c)){
+					txtCodigo.setEditable(false);
+				}else{
+					txtCodigo.setEditable(true);
+				}
+			}
+		});
+		txtCodigo.setBounds(60, 15, 70, 23);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+
+		lblNumDptos = new JLabel("# dptos");
+		lblNumDptos.setBounds(10, 40, 50, 23);
+		contentPane.add(lblNumDptos);
+		
+		txtNumDptos = new JTextField();
+		txtNumDptos.setBounds(60, 40, 70, 23);
+		contentPane.add(txtNumDptos);
+		txtNumDptos.setColumns(10);
+		
+		lblNumPisos = new JLabel("# pisos");
+		lblNumPisos.setBounds(150, 15, 80, 23);
+		contentPane.add(lblNumPisos);
+
+		txtNumPisos = new JTextField();
+		txtNumPisos.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				Character c = e.getKeyChar();
+				
+				if(Character.isLetter(c) || c.equals(" ")){
+					txtNumPisos.setEditable(true);
+				}else{
+					txtNumPisos.setEditable(false);
+				}
+				
+			}
+		});
+		txtNumPisos.setBounds(230, 15, 70, 23);
+		contentPane.add(txtNumPisos);
+		txtNumPisos.setColumns(10);
+		
+		lblPrecioDpto = new JLabel("precio dpto $");
+		lblPrecioDpto.setBounds(150, 40, 80, 23);
+		contentPane.add(lblPrecioDpto);
+		
+		txtPrecioDpto = new JTextField();
+		txtPrecioDpto.setBounds(230, 40, 70, 23);
+		contentPane.add(txtPrecioDpto);
+		txtPrecioDpto.setColumns(10);
+		
+		btnProcesar = new JButton("Procesar");
+		btnProcesar.setBounds(330, 15, 94, 23);
+		btnProcesar.addActionListener(this);
+		contentPane.add(btnProcesar);
+		
+		btnBorrar = new JButton("Borrar");
+		btnBorrar.setBounds(330, 40, 94, 23);
+		btnBorrar.addActionListener(this);
+		contentPane.add(btnBorrar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 70, 415, 380);
+		contentPane.add(scrollPane);
+		
+		txtS = new JTextArea();
+		txtS.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		scrollPane.setViewportView(txtS);
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnBorrar) {
+			actionPerformedBtnBorrar(arg0);
+		}
+		if (arg0.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(arg0);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent arg0) {
+		try {
+			int codigo = leerCodigo();
+			try {
+				int numDptos = leerNumDptos();
+				try {
+					int numPisos = leerNumPisos();
+					try {
+						double precioDpto = leerPrecioDpto();
+						Edificio e = new Edificio(codigo, numDptos, numPisos, precioDpto);
+						listado(e);
+						
+						double preAumentado = e.getPreDolar() * 1.2;
+						e.setPreDolar(preAumentado);
+						listado(e);
+						
+						limpieza();
+					}
+					catch (Exception e) {
+						mensaje("Ingrese PRECIO DE DEPARTAMENTO correcto", txtPrecioDpto);
+					}
+				}
+				catch (Exception e) {
+					mensaje("Ingrese NÚMERO DE PISOS correcto", txtNumPisos);
+				}
+			}
+			catch (Exception e) {
+				mensaje("Ingrese NÚMERO DE DEPARTAMENTOS correcto", txtNumDptos);
+			}
+		}
+		catch (Exception e) {
+			mensaje("Ingrese CÓDIGO correcto", txtCodigo);
+		}	
+	}
+	void listado(Edificio edi){
+		imprimir("DirMem   :  " + edi);
+		imprimir("Cantidad pisos   :  " + edi.getCantPiso());
+		imprimir("Código   :  " + edi.getCod());
+		imprimir("Número dpto   :  " + edi.getNumDpto());
+		imprimir("Precio dolar   :  " + edi.getPreDolar());
+		imprimir("Precio dolar edificio   :  " + edi.precioDolarEdif());
+		imprimir("");
+	}
+	protected void actionPerformedBtnBorrar(ActionEvent arg0) {
+		limpieza();
+		txtS.setText("");		
+	}
+	//  Métodos tipo void (sin parámetros)
+	void limpieza() {
+		txtCodigo.setText("");
+		txtNumDptos.setText("");
+		txtNumPisos.setText("");
+		txtPrecioDpto.setText("");
+		txtCodigo.requestFocus();
+	}
+	//  Métodos tipo void (con parámetros)
+	void imprimir(String s) {
+		txtS.append(s + "\n");
+	}
+
+	void mensaje(String s, JTextField txt) {
+		JOptionPane.showMessageDialog(this, s);
+		txt.setText("");
+		txt.requestFocus();
+	}
+	//  Métodos que retornan valor (sin parámetros)
+	int leerCodigo() {
+		return Integer.parseInt(txtCodigo.getText().trim());
+	}
+	int leerNumDptos() {
+		return Integer.parseInt(txtNumDptos.getText().trim());
+	}
+	int leerNumPisos() {
+		return Integer.parseInt(txtNumPisos.getText().trim());
+	}
+	double leerPrecioDpto() {
+		return Double.parseDouble(txtPrecioDpto.getText().trim());
+	}
+	
+}
