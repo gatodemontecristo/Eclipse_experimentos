@@ -191,13 +191,10 @@ public class Formulario extends JFrame implements KeyListener, ActionListener  {
 		imprimir("Nombre\t:  " + nombre);
 		imprimir("Apellido\t:  " + apellido);
 		imprimir("Edad\t:  " + edad);
-		imprimir("Sueldo\t:  " + decimalFormat(sueldo));
+		imprimir("Sueldo\t:  " + sueldo);
 		imprimir("");
 		imprimir("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	
-	}
-	String decimalFormat(double p){
-		return String.format("%.2f",p);
 	}
 	void imprimir(String s) {
 		txtS.append(s + "\n");
