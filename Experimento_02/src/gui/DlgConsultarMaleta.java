@@ -46,6 +46,7 @@ public class DlgConsultarMaleta extends JDialog implements ActionListener {
 				try {
 					DlgConsultarMaleta dialog = new DlgConsultarMaleta();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					
 					dialog.setVisible(true);
 				}
 				catch (Exception e) {

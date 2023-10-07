@@ -235,6 +235,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1.add(btnListarMaleta);
 
 		btnModificarMaleta = new JButton("Modificar maleta");
+		btnModificarMaleta.addActionListener(this);
 		btnModificarMaleta.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/pen-solid.png")), 30, 30));
 		btnModificarMaleta.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -259,6 +260,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1.add(btnGenerarReportes);
 
 		btnVender = new JButton("Vender");
+		btnVender.addActionListener(this);
 		btnVender.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/sack-dollar-solid.png")), 30, 30));
 		btnVender.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -366,6 +368,12 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnVender) {
+			actionPerformedBtnVender(e);
+		}
+		if (e.getSource() == btnModificarMaleta) {
+			actionPerformedBtnModificarMaleta(e);
+		}
 		if (e.getSource() == btnListarMaleta) {
 			actionPerformedBtnListarMaleta(e);
 		}
@@ -445,11 +453,25 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 	protected void actionPerformedBtnConsultarMaleta(ActionEvent e) {
 		DlgConsultarMaleta dcm = new DlgConsultarMaleta();
 		dcm.setLocationRelativeTo(this);
+		dcm.setModal(true);
 		dcm.setVisible(true);
 	}
 	protected void actionPerformedBtnListarMaleta(ActionEvent e) {
 		DlgListarMaletas dlm = new DlgListarMaletas();
 		dlm.setLocationRelativeTo(this);
+		dlm.setModal(true);
 		dlm.setVisible(true);
+	}
+	protected void actionPerformedBtnModificarMaleta(ActionEvent e) {
+		DlgModificarMaleta dlm = new DlgModificarMaleta();
+		dlm.setLocationRelativeTo(this);
+		dlm.setModal(true);
+		dlm.setVisible(true);
+	}
+	protected void actionPerformedBtnVender(ActionEvent e) {
+		DlgVender dlv = new DlgVender();
+		dlv.setLocationRelativeTo(this);
+		dlv.setModal(true);
+		dlv.setVisible(true);
 	}
 }

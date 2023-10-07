@@ -100,58 +100,51 @@ public class DlgListarMaletas extends JDialog implements ActionListener {
 	    imprimir("─────────▄█░░▀▀▀▀▀░░█▄");
 	    imprimir("──▄▄───█░░░░░░░░░░░█───▄▄");
 	    imprimir("█▄▄█──█░░▀░░▄░░▀░░█─█▄▄█");
-	    imprimir("██████ LISTADO DE MALETAS █████");	
-		imprimir("");
+	    imprimir("██████ LISTADO DE MALETAS █████");
+	    imprimir("");
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 		imprimir("Código      :  " + Proyecto.codigo0);
 		imprimir("Descripción :  " + Proyecto.modelo0);
-		imprimir("Precio (S/) :  " + formatear(Proyecto.precio0));
-		imprimir("Ancho (cm)  :  " + formatear(Proyecto.ancho0));
-		imprimir("Alto (cm)   :  " + formatear(Proyecto.alto0));
-		imprimir("Fondo (cm)  :  " + formatear(Proyecto.fondo0));
-		imprimir("");
+		imprimir("Precio (S/) :  " + decimalFormat(Proyecto.precio0));
+		imprimir("Ancho (cm)  :  " + decimalFormat(Proyecto.ancho0));
+		imprimir("Alto (cm)   :  " + decimalFormat(Proyecto.alto0));
+		imprimir("Fondo (cm)  :  " + decimalFormat(Proyecto.fondo0));
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 		imprimir("Código      :  " + Proyecto.codigo1);
 		imprimir("Descripción :  " + Proyecto.modelo1);
-		imprimir("Precio (S/) :  " + formatear(Proyecto.precio1));
-		imprimir("Ancho (cm)  :  " + formatear(Proyecto.ancho1));
-		imprimir("Alto (cm)   :  " + formatear(Proyecto.alto1));
-		imprimir("Fondo (cm)  :  " + formatear(Proyecto.fondo1));
-		imprimir("");
+		imprimir("Precio (S/) :  " + decimalFormat(Proyecto.precio1));
+		imprimir("Ancho (cm)  :  " + decimalFormat(Proyecto.ancho1));
+		imprimir("Alto (cm)   :  " + decimalFormat(Proyecto.alto1));
+		imprimir("Fondo (cm)  :  " + decimalFormat(Proyecto.fondo1));
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 		imprimir("Código      :  " + Proyecto.codigo2);
 		imprimir("Descripción :  " + Proyecto.modelo2);
-		imprimir("Precio (S/) :  " + formatear(Proyecto.precio2));
-		imprimir("Ancho (cm)  :  " + formatear(Proyecto.ancho2));
-		imprimir("Alto (cm)   :  " + formatear(Proyecto.alto2));
-		imprimir("Fondo (cm)  :  " + formatear(Proyecto.fondo2));
-		imprimir("");
+		imprimir("Precio (S/) :  " + decimalFormat(Proyecto.precio2));
+		imprimir("Ancho (cm)  :  " + decimalFormat(Proyecto.ancho2));
+		imprimir("Alto (cm)   :  " + decimalFormat(Proyecto.alto2));
+		imprimir("Fondo (cm)  :  " + decimalFormat(Proyecto.fondo2));
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 		imprimir("Código      :  " + Proyecto.codigo3);
 		imprimir("Descripción :  " + Proyecto.modelo3);
-		imprimir("Precio (S/) :  " + formatear(Proyecto.precio3));
-		imprimir("Ancho (cm)  :  " + formatear(Proyecto.ancho3));
-		imprimir("Alto (cm)   :  " + formatear(Proyecto.alto3));
-		imprimir("Fondo (cm)  :  " + formatear(Proyecto.fondo3));
-		imprimir("");
+		imprimir("Precio (S/) :  " + decimalFormat(Proyecto.precio3));
+		imprimir("Ancho (cm)  :  " + decimalFormat(Proyecto.ancho3));
+		imprimir("Alto (cm)   :  " + decimalFormat(Proyecto.alto3));
+		imprimir("Fondo (cm)  :  " + decimalFormat(Proyecto.fondo3));
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 		imprimir("Código      :  " + Proyecto.codigo4);
 		imprimir("Descripción :  " + Proyecto.modelo4);
-		imprimir("Precio (S/) :  " + formatear(Proyecto.precio4));
-		imprimir("Ancho (cm)  :  " + formatear(Proyecto.ancho4));
-		imprimir("Alto (cm)   :  " + formatear(Proyecto.alto4));
-		imprimir("Fondo (cm)  :  " + formatear(Proyecto.fondo4));
+		imprimir("Precio (S/) :  " + decimalFormat(Proyecto.precio4));
+		imprimir("Ancho (cm)  :  " + decimalFormat(Proyecto.ancho4));
+		imprimir("Alto (cm)   :  " + decimalFormat(Proyecto.alto4));
+		imprimir("Fondo (cm)  :  " + decimalFormat(Proyecto.fondo4));
+		imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
 	}
 	//  M�todos tipo void (con par�metros)	
 	void imprimir(String s) {
 		txtS.append(s + "\n");
 	}
 	//  M�todos que retornan valor (con par�metros)
-	String formatear(double numero) {
-		String cadena = "" + Math.round(numero*100), num = "";
-		int longitud = cadena.length();
-		for (int i=0; i<longitud; i++) {
-			num += cadena.charAt(i);
-			if (i == longitud-6)
-				num += ",";
-			if (i == longitud-3)
-				num += ".";
-		}
-		return String.format("%10s", num);
-	}	
+	String decimalFormat(double p){
+		return String.format("%.2f",p).replace(",", ".");
+	}
 }
