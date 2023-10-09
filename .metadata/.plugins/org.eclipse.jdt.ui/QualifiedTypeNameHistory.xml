@@ -8,4 +8,6 @@
     <fullyQualifiedTypeName name="javax.swing.UIManager"/>
     <fullyQualifiedTypeName name="com.formdev.flatlaf.FlatDarkLaf"/>
     <fullyQualifiedTypeName name="gui.DlgModificarMaleta"/>
+    <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
+    <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
 </qualifiedTypeNameHistroy>

@@ -32,18 +32,11 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 	private JLabel lblCantidad;
 	private JLabel lblCodigo;
 	private JLabel lblPrecio;
-	private JLabel lblApagar;
-	private JLabel lblVuelto;
 	private JLabel lblImgDialogo;
 	private JLabel lblFechaHora;
 	private JTextField txtPrecio;
-	private JTextField txtApagar;
-	private JTextField txtEfectivo;
-	private JTextField txtVuelto;
 	private JComboBox <String> cboCodigo;
-	private JLayeredPane layeredPane;
 	private JButton btnVender;
-	private JButton btnEfectivo;
 	private JButton btnCerrar;
 	private JScrollPane scrollPane;
 	private JTextArea txtS;
@@ -70,6 +63,10 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 	                     impAcumuladoMT2 = 0.0,
 	                     impAcumuladoMT3 = 0.0,
 	                     impAcumuladoMT4 = 0.0;
+	public static double importeAPagar = 0.0;
+	public static int formaDePago = 0;
+	public static double efectivoDePago = 0.0;
+	public static double vueltoADar = 0.0;
 	private JTextField txtCantidad;
 	
 	/**
@@ -96,7 +93,7 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 	public DlgVender() {
 		setResizable(false);
 		setTitle("Vender");
-		setBounds(100, 100, 570, 450);
+		setBounds(100, 100, 373, 450);
 		getContentPane().setLayout(null);
 		
 		txtCantidad = new JTextField();
@@ -132,67 +129,25 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 		txtPrecio.setBounds(135, 70, 70, 23);
 		getContentPane().add(txtPrecio);
 		txtPrecio.setColumns(10);
-	
-		layeredPane = new JLayeredPane();
-		layeredPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		layeredPane.setBounds(225, 10, 220, 90);
-		getContentPane().add(layeredPane);
-
-		lblApagar = new JLabel("Importe a pagar (S/)");
-		lblApagar.setForeground(Color.WHITE);
-		lblApagar.setBounds(10, 10, 120, 23);
-		layeredPane.add(lblApagar);
-
-		btnEfectivo = new JButton("Efectivo (S/)");
-		btnEfectivo.addActionListener(this);
-		btnEfectivo.setEnabled(false);
-		btnEfectivo.setBounds(10, 35, 110, 23);
-		layeredPane.add(btnEfectivo);
-		
-		lblVuelto = new JLabel("Vuelto (S/)");
-		lblVuelto.setForeground(Color.WHITE);
-		lblVuelto.setBounds(35, 60, 110, 23);
-		layeredPane.add(lblVuelto);
-	
-		txtApagar = new JTextField();
-		txtApagar.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtApagar.setBounds(130, 10, 80, 23);
-		txtApagar.setEditable(false);
-		layeredPane.add(txtApagar);
-		txtApagar.setColumns(10);
-
-		txtEfectivo = new JTextField();
-		txtEfectivo.addActionListener(this);
-		txtEfectivo.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtEfectivo.setEditable(false);
-		txtEfectivo.setBounds(130, 35, 80, 23);
-		layeredPane.add(txtEfectivo);
-		txtEfectivo.setColumns(10);
-		
-		txtVuelto = new JTextField();
-		txtVuelto.setFont(new Font("Monospaced", Font.PLAIN, 11));
-		txtVuelto.setBounds(130, 60, 80, 23);
-		txtVuelto.setEditable(false);
-		layeredPane.add(txtVuelto);
-		txtVuelto.setColumns(10);
 		
 		btnVender = new JButton("Vender");
+		btnVender.setEnabled(false);
 		btnVender.addActionListener(this);
-		btnVender.setBounds(460, 10, 90, 23);
+		btnVender.setBounds(254, 10, 90, 23);
 		getContentPane().add(btnVender);
 		
 		btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(this);
-		btnCerrar.setBounds(460, 35, 90, 23);
+		btnCerrar.setBounds(254, 40, 90, 23);
 		getContentPane().add(btnCerrar);
 
 		lblFechaHora = new JLabel();
 		lblFechaHora.setForeground(Color.WHITE);
-		lblFechaHora.setBounds(430, 105, 120, 23);
+		lblFechaHora.setBounds(229, 97, 120, 23);
 		getContentPane().add(lblFechaHora);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 130, 540, 280);
+		scrollPane.setBounds(10, 130, 339, 280);
 		getContentPane().add(scrollPane);
 		
 		txtS = new JTextArea();
@@ -202,7 +157,7 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 		
 		lblImgDialogo = new JLabel();
 		lblImgDialogo.setIcon(new ImageIcon("imagenes/dialogo.png"));
-		lblImgDialogo.setBounds(0, 0, 561, 416);
+		lblImgDialogo.setBounds(0, 0, 358, 416);
 		getContentPane().add(lblImgDialogo);
 
 		hilo = new Thread(this);
@@ -221,17 +176,14 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 		if (arg0.getSource() == btnCerrar) {
 			actionPerformedBtnCerrar(arg0);
 		}
-		if (arg0.getSource() == txtEfectivo  ||  arg0.getSource() == btnEfectivo) {
-			actionPerformedTxtEfectivo(arg0);
-		}
 		if (arg0.getSource() == cboCodigo) {
 			actionPerformedCboCodigo(arg0);
 		}
-		if (arg0.getSource() == txtCantidad  ||  arg0.getSource() == btnVender) {
+		if (arg0.getSource() == btnVender) {
 			actionPerformedBtnVender(arg0);
 		}
 	}
-	protected void actionPerformedBtnVender(ActionEvent arg0) {
+	public void imprimirBoleta() {
 		try {
 			int cantidad = Integer.parseInt(txtCantidad.getText());
 			double precio = Double.parseDouble(txtPrecio.getText()),
@@ -296,10 +248,18 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 			imprimir("Cantidad de maletas  :  " + cantidad);
 			imprimir("Precio unitario      :  S/" + decimalFormat(precio));
 			imprimir("Importe de la compra :  S/" + decimalFormat(importeCompra));
-			imprimir("Descuento            :  S/" + decimalFormat(descuento));		
-			imprimir("Importe a Pagar      :  S/" + decimalFormat(aPagar));
+			imprimir("Descuento            :  S/" + decimalFormat(descuento));	
 			imprimir("Obsequio             :  " + obsequio);
 			imprimir("Premio sorpresa      :  " + premio);
+			imprimir("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+			imprimir("Importe a Pagar      :  S/" + decimalFormat(aPagar));
+			imprimir("Forma de Pago        :  " + formatoFormaDePago(formaDePago));
+			if(formaDePago==0) {
+			imprimir("Efectivo             :  S/" + decimalFormat(efectivoDePago));
+			}
+			imprimir("Vuelto               :  S/" + decimalFormat(vueltoADar));
+			
+
 			
 			switch (cboCodigo.getSelectedIndex()) {
 				case 0:
@@ -327,18 +287,32 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 					maletasVendidasMT4 += cantidad;
 			        impAcumuladoMT4 += aPagar;
 			}
+			txtCantidad.setText("");
+			txtCantidad.requestFocus();
+			validarCampos();
 			
-			txtApagar.setText(decimalFormat(aPagar));
-			btnEfectivo.setEnabled(true);
-			txtEfectivo.setEditable(true);
-			txtEfectivo.setText("");
-			txtEfectivo.requestFocus();
-			txtVuelto.setText("");
 		}
 		catch (Exception x) {
-			mensaje("Ingrese CANTIDAD correcta", "Error");
+			mensaje("Ocurrio un error", "Error");
 			txtCantidad.requestFocus();
 		}
+	}
+	public String formatoFormaDePago(int forma) {
+		if(forma==0) {return "Efectivo";}
+		else if(forma==1) {return "Débito";}
+		else {return "Crédito";}
+	}
+	protected void actionPerformedBtnVender(ActionEvent arg0) {
+		int cantidad = Integer.parseInt(txtCantidad.getText());
+		double precio = Double.parseDouble(txtPrecio.getText());
+		importeAPagar = cantidad*precio;
+		efectivoDePago = 0.0;
+		formaDePago = 0;
+		
+		DlgVenderCambio dlv = new DlgVenderCambio(this);
+		dlv.setLocationRelativeTo(this);
+		dlv.setModal(true);
+		dlv.setVisible(true);
 	}
 	protected void actionPerformedCboCodigo(ActionEvent arg0) {
 	
@@ -362,31 +336,11 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 		
 		txtCantidad.requestFocus();
 	}
-	protected void actionPerformedTxtEfectivo(ActionEvent e) {
-		try {
-			double efectivo = Double.parseDouble(txtEfectivo.getText());
-			if (efectivo < aPagar) {
-				mensaje("Falta EFECTIVO", "Observación");
-				txtEfectivo.setText("");
-				txtEfectivo.requestFocus();
-			}
-			else {
-				double vuelto = efectivo - aPagar;
-				txtApagar.setText(decimalFormat(aPagar));
-				txtEfectivo.setText(decimalFormat(efectivo));
-				txtVuelto.setText(decimalFormat(vuelto));
-				btnEfectivo.setEnabled(false);
-				txtCantidad.requestFocus();
-			}
-		}
-		catch (Exception x) {
-			mensaje("Ingrese EFECTIVO correcto", "Error");
-			txtEfectivo.setText("");
-			txtEfectivo.requestFocus();
-		}
-	}	
+
 	protected void actionPerformedBtnCerrar(ActionEvent arg0) {
+		
 		dispose();
+		
 	}
 	//  M�todos tipo void (sin par�metros)
 	void FechayHora() {
@@ -413,10 +367,23 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 			   String.format("%02d",calendario.get(Calendar.SECOND));
 	}
 	
-	
+	public void validarCampos() {
+
+		JTextField  elementos[] = {txtCantidad};
+		String valor;
+		for(int i=0; i<elementos.length;i++) {
+			valor = elementos[i].getText().trim();
+			if(valor.length()==0) {
+				btnVender.setEnabled(false);
+				return;
+			}
+		} 
+		btnVender.setEnabled(true);
+	}	
 	public void keyPressed(KeyEvent e) {
 	}
 	public void keyReleased(KeyEvent e) {
+		validarCampos();
 	}
 	public void keyTyped(KeyEvent e) {
 		if (e.getSource() == txtCantidad) {

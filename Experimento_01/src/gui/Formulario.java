@@ -197,7 +197,7 @@ public class Formulario extends JFrame implements KeyListener, ActionListener  {
 	
 	}
 	String decimalFormat(double p){
-		return String.format("%.2f",p);
+		return String.format("%.2f",p).replace(",", ".");
 	}
 	void imprimir(String s) {
 		txtS.append(s + "\n");

@@ -248,6 +248,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1.add(btnModificarMaleta);
 
 		btnGenerarReportes = new JButton("Generar reportes");
+		btnGenerarReportes.addActionListener(this);
 		btnGenerarReportes.setIcon(resizeIcon(
 				new ImageIcon(Proyecto.class.getResource("/img/file-invoice-dollar-solid.png")), 30, 30));
 		btnGenerarReportes.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -274,6 +275,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		
 		
 		btnConfigurarDesc = new JButton("Configurar Descuentos");
+		btnConfigurarDesc.addActionListener(this);
 		btnConfigurarDesc.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnConfigurarDesc.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/percent-solid.png")), 30, 30));
@@ -368,6 +370,12 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnConfigurarDesc) {
+			actionPerformedBtnConfigurarDesc(e);
+		}
+		if (e.getSource() == btnGenerarReportes) {
+			actionPerformedBtnGenerarReportes(e);
+		}
 		if (e.getSource() == btnVender) {
 			actionPerformedBtnVender(e);
 		}
@@ -473,5 +481,17 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		dlv.setLocationRelativeTo(this);
 		dlv.setModal(true);
 		dlv.setVisible(true);
+	}
+	protected void actionPerformedBtnGenerarReportes(ActionEvent e) {
+		DlgGenerarReportes dlr = new DlgGenerarReportes();
+		dlr.setLocationRelativeTo(this);
+		dlr.setModal(true);
+		dlr.setVisible(true);
+	}
+	protected void actionPerformedBtnConfigurarDesc(ActionEvent e) {
+		DlgConfigurarDescuentos dcd = new DlgConfigurarDescuentos();
+		dcd.setLocationRelativeTo(this);
+		dcd.setModal(true);
+		dcd.setVisible(true);
 	}
 }
