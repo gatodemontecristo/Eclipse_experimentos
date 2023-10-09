@@ -10,4 +10,6 @@
     <fullyQualifiedTypeName name="gui.DlgModificarMaleta"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
     <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
+    <fullyQualifiedTypeName name="javax.swing.text.DocumentFilter.FilterBypass"/>
+    <fullyQualifiedTypeName name="javax.swing.text.NavigationFilter.FilterBypass"/>
 </qualifiedTypeNameHistroy>

@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
 
 public class DlgVender extends JDialog implements ActionListener, Runnable, KeyListener {
 	
@@ -91,6 +92,7 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 	 * Create the dialog.
 	 */
 	public DlgVender() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DlgVender.class.getResource("/img/sack-dollar-solid.png")));
 		setResizable(false);
 		setTitle("Vender");
 		setBounds(100, 100, 373, 450);
@@ -384,6 +386,7 @@ public class DlgVender extends JDialog implements ActionListener, Runnable, KeyL
 	}
 	public void keyReleased(KeyEvent e) {
 		validarCampos();
+		
 	}
 	public void keyTyped(KeyEvent e) {
 		if (e.getSource() == txtCantidad) {

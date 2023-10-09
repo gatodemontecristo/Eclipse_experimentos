@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Toolkit;
+import javax.swing.JSeparator;
 
 public class Proyecto extends JFrame implements MouseListener, ActionListener {
 
@@ -128,17 +129,61 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		setTitle("Maletinmania 2.0");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Proyecto.class.getResource("/img/githublogo.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 939, 547);
+		setBounds(100, 100, 939, 651);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		panel_2.setBorder(null);
+		panel_2.setBounds(376, 10, 523, 565);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		lblNewLabel = new JLabel("Maletinmania 2.0");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 25));
+		lblNewLabel.setForeground(new Color(60, 63, 65));
+		lblNewLabel.setBounds(81, 37, 334, 85);
+		panel_2.add(lblNewLabel);
+		
+		lblRealizaPor = new JLabel("realizado por :");
+		lblRealizaPor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRealizaPor.setFont(new Font("Arial", Font.ITALIC, 20));
+		lblRealizaPor.setBounds(136, 119, 249, 62);
+		lblRealizaPor.setForeground(new Color(60, 63, 65));
+		panel_2.add(lblRealizaPor);
+		
+		separator = new JSeparator();
+		separator.setBounds(92, 106, 345, 2);
+		panel_2.add(separator);
+		
+		lblErickDejoVicente = new JLabel("Erick Dejo Vicente");
+		lblErickDejoVicente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblErickDejoVicente.setFont(new Font("Arial", Font.ITALIC, 20));
+		lblErickDejoVicente.setForeground(new Color(60, 63, 65));
+		lblErickDejoVicente.setBounds(136, 149, 249, 62);
+		panel_2.add(lblErickDejoVicente);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(
+				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/yo.png")), 300, 300));
+		lblNewLabel_1.setBounds(114, 221, 300, 300);
+		panel_2.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("github.com/gatodemontecristo");
+		lblNewLabel_2.setForeground(Color.BLACK);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setBounds(160, 531, 215, 24);
+		panel_2.add(lblNewLabel_2);
 
 		panel = new JPanel();
 		panel.setBackground(new Color(60, 63, 65));
-		panel.setBounds(0, 0, 366, 520);
+		panel.setBounds(0, 0, 366, 621);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
@@ -147,6 +192,20 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		btnVentas.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/briefcase-solid.png")), 30, 30));
 		btnVentas.addMouseListener(this);
+		
+		btnSalir = new JButton("Salir");
+		btnSalir.addMouseListener(this);
+		btnSalir.addActionListener(this);
+		btnSalir.setIcon(
+				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/right-from-bracket-solid.png")), 30, 30));
+		btnSalir.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnSalir.setForeground(Color.WHITE);
+		btnSalir.setFont(new Font("Arial", Font.BOLD, 16));
+		btnSalir.setBorderPainted(false);
+		btnSalir.setBackground(new Color(60, 63, 65));
+		btnSalir.setBounds(0, 438, 366, 87);
+		panel.add(btnSalir);
+		
 		btnVentas.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnVentas.setForeground(Color.WHITE);
 		btnVentas.setFont(new Font("Arial", Font.BOLD, 16));
@@ -201,7 +260,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1 = new JPanel();
 		panel_1.setBorder(null);
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(376, 20, 539, 500);
+		panel_1.setBounds(376, 64, 539, 500);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -288,6 +347,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1.add(btnConfigurarDesc);
 		
 		btnConfigurarObs = new JButton("Configurar Obsequio");
+		btnConfigurarObs.addActionListener(this);
 		btnConfigurarObs.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/gift-solid.png")), 30, 30));
 		btnConfigurarObs.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -301,6 +361,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		
 		
 		btnConfigurarCant = new JButton("Configurar Cantidad");
+		btnConfigurarCant.addActionListener(this);
 		btnConfigurarCant.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/scale-balanced-solid.png")), 30, 30));
 		btnConfigurarCant.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -313,6 +374,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		panel_1.add(btnConfigurarCant);
 		
 		btnConfigurarSorpresa = new JButton("Configurar Sorpresa");
+		btnConfigurarSorpresa.addActionListener(this);
 		btnConfigurarSorpresa.setIcon(
 				resizeIcon(new ImageIcon(Proyecto.class.getResource("/img/robot-solid.png")), 30, 30));
 		btnConfigurarSorpresa.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -336,9 +398,18 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 
 		btnVender.setVisible(false);
 		btnGenerarReportes.setVisible(false);
+		panel_2.setVisible(false);
 
 	}
 	Component botonSeleccionado;
+	private JButton btnSalir;
+	private JPanel panel_2;
+	private JLabel lblNewLabel;
+	private JLabel lblRealizaPor;
+	private JSeparator separator;
+	private JLabel lblErickDejoVicente;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
 	public static ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
 		Image image = icon.getImage();
 		Image newImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -349,6 +420,7 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
+	
 		if(botonSeleccionado != e.getComponent()) {
 			e.getComponent().setBackground(new Color(105, 105, 105));
 		}
@@ -370,6 +442,19 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSalir) {
+			botonSeleccionado = btnSalir;
+			actionPerformedBtnSalir(e);
+		}
+		if (e.getSource() == btnConfigurarSorpresa) {
+			actionPerformedBtnConfigurarSorpresa(e);
+		}
+		if (e.getSource() == btnConfigurarCant) {
+			actionPerformedBtnConfigurarCant(e);
+		}
+		if (e.getSource() == btnConfigurarObs) {
+			actionPerformedBtnConfigurarObs(e);
+		}
 		if (e.getSource() == btnConfigurarDesc) {
 			actionPerformedBtnConfigurarDesc(e);
 		}
@@ -391,6 +476,10 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		if (e.getSource() == btnVentas) {
 			botonSeleccionado = btnVentas;
 			actionPerformedBtnVentas(e);
+		}
+		if (e.getSource() == btnAyuda) {
+			botonSeleccionado = btnAyuda;
+			actionPerformedBtnAyuda(e);
 		}
 		if (e.getSource() == btnMantenimiento) {
 			botonSeleccionado = btnMantenimiento;
@@ -416,10 +505,12 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 
 		btnVender.setVisible(false);
 		btnGenerarReportes.setVisible(false);
+		panel_2.setVisible(false);
 
 		btnMantenimiento.setBackground(new Color(223, 41, 53));
 		btnVentas.setBackground(new Color(60, 63, 65));
 		btnConfiguracin.setBackground(new Color(60, 63, 65));
+		btnAyuda.setBackground(new Color(60, 63, 65));
 
 	}
 
@@ -436,10 +527,33 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 
 		btnVender.setVisible(true);
 		btnGenerarReportes.setVisible(true);
+		panel_2.setVisible(false);
 
 		btnMantenimiento.setBackground(new Color(60, 63, 65));
 		btnVentas.setBackground(new Color(223, 41, 53));
 		btnConfiguracin.setBackground(new Color(60, 63, 65));
+		btnAyuda.setBackground(new Color(60, 63, 65));
+	}
+	protected void actionPerformedBtnAyuda(ActionEvent e) {
+		
+		btnConfigurarDesc.setVisible(false);
+		btnConfigurarObs.setVisible(false);
+		btnConfigurarCant.setVisible(false);
+		btnConfigurarSorpresa.setVisible(false);
+		
+		btnConsultarMaleta.setVisible(false);
+		btnModificarMaleta.setVisible(false);
+		btnListarMaleta.setVisible(false);
+
+		btnVender.setVisible(false);
+		btnGenerarReportes.setVisible(false);
+		
+		panel_2.setVisible(true);
+
+		btnMantenimiento.setBackground(new Color(60, 63, 65));
+		btnVentas.setBackground(new Color(60, 63, 65));
+		btnConfiguracin.setBackground(new Color(60, 63, 65));
+		btnAyuda.setBackground(new Color(223, 41, 53));
 	}
 	protected void actionPerformedBtnConfiguracin(ActionEvent e) {
 		btnConfigurarDesc.setVisible(true);
@@ -453,10 +567,12 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 
 		btnVender.setVisible(false);
 		btnGenerarReportes.setVisible(false);
+		panel_2.setVisible(false);
 
 		btnMantenimiento.setBackground(new Color(60, 63, 65));
 		btnVentas.setBackground(new Color(60, 63, 65));
 		btnConfiguracin.setBackground(new Color(223, 41, 53));
+		btnAyuda.setBackground(new Color(60, 63, 65));
 	}
 	protected void actionPerformedBtnConsultarMaleta(ActionEvent e) {
 		DlgConsultarMaleta dcm = new DlgConsultarMaleta();
@@ -493,5 +609,27 @@ public class Proyecto extends JFrame implements MouseListener, ActionListener {
 		dcd.setLocationRelativeTo(this);
 		dcd.setModal(true);
 		dcd.setVisible(true);
+	}
+	protected void actionPerformedBtnConfigurarObs(ActionEvent e) {
+		DlgConfigurarObsequio dco = new DlgConfigurarObsequio();
+		dco.setLocationRelativeTo(this);
+		dco.setModal(true);
+		dco.setVisible(true);
+	}
+	protected void actionPerformedBtnConfigurarCant(ActionEvent e) {
+		DlgConfigurarCantidadOptimaMaletas dcm = new DlgConfigurarCantidadOptimaMaletas();
+		dcm.setLocationRelativeTo(this);
+		dcm.setModal(true);
+		dcm.setVisible(true);
+	}
+	
+	protected void actionPerformedBtnConfigurarSorpresa(ActionEvent e) {
+		DlgConfigurarPremioSorpresa dps = new DlgConfigurarPremioSorpresa();
+		dps.setLocationRelativeTo(this);
+		dps.setModal(true);
+		dps.setVisible(true);
+	}
+	protected void actionPerformedBtnSalir(ActionEvent e) {
+		System.exit(0);
 	}
 }

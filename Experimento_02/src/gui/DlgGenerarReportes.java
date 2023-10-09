@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class DlgGenerarReportes extends JDialog implements ActionListener {
 	
@@ -49,8 +50,9 @@ public class DlgGenerarReportes extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 	public DlgGenerarReportes() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(DlgGenerarReportes.class.getResource("/img/file-invoice-dollar-solid.png")));
 		setResizable(false);
-		setTitle("Ventas | Generar reportes");
+		setTitle("Generar reportes");
 		setBounds(100, 100, 459, 315);
 		getContentPane().setLayout(null);
 		
