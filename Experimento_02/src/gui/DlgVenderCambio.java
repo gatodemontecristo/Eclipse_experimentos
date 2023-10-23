@@ -50,7 +50,7 @@ public class DlgVenderCambio extends JDialog implements ActionListener, KeyListe
 	/**
 	 * Create the dialog.
 	 */
-	public DlgVenderCambio(DlgVender parentDialog) {
+	public DlgVenderCambio(final DlgVender parentDialog) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DlgVenderCambio.class.getResource("/img/coins-solid.png")));
 		setTitle("Efectuar cambio");
 		setBounds(100, 100, 386, 170);
